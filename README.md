@@ -1,32 +1,76 @@
-Smart Burnout Predictor
+# Smart Burnout Predictor
 
-📌 Overview
-The Smart Burnout Predictor is an interactive machine learning web application built using Streamlit that predicts an employee’s burnout risk level (Low, Medium, High) based on daily work habits and behavioral patterns.
-This project helps individuals and organizations proactively identify burnout risk and take preventive actions to improve productivity and well-being.
+![Status](https://img.shields.io/badge/status-experimental-yellow)
+![Python](https://img.shields.io/badge/python-3.8%2B-blue)
 
-🚀 Features
-🔮 Real-time Burnout Prediction
-📊 Interactive Data Visualizations
-📈 Model Performance Metrics (Accuracy & Confusion Matrix)
-🎯 Feature Importance Analysis
-🧠 Machine Learning powered (Random Forest)
-🎛️ User-friendly dashboard with sliders and inputs
+## Summary
+
+`Smart Burnout Predictor` is a reproducible demo that trains a classification model to estimate daily burnout risk for work-from-home users. It combines a documented data pipeline, a Random Forest baseline, and an interactive Streamlit demo to illustrate model predictions and explainability.
+
+This README is written for maintainers and engineers who will: reproduce training, extend the model, integrate the app into a CI/CD pipeline, or deploy it.
+
+## Quickstart (developer)
+
+1. Clone the repository and open the project root.
+
+```powershell
+git clone <repo-url>
+cd WFH_Burnout_Prediction
+```
+
+2. Create and activate a virtual environment (Windows PowerShell):
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+3. Install dependencies:
+
+```powershell
+pip install -r requirements.txt
+```
+
+4. Run the demo UI:
+
+```powershell
+uv run streamlit run Burnout_Prediction.py
+```
+
+5. Run unit tests :
+
+```powershell
+python -m venv .venv
+
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+. .\.venv\Scripts\Activate.ps1
 
 
-🛠️ Tech Stack
-Frontend/UI: Streamlit
-Backend: Python
-Libraries Used:
-    Pandas, NumPy
-    Scikit-learn
-    Imbalanced-learn (SMOTE)
-    Matplotlib, Seaborn
-    Plotly
+python -m pytest tests/test_burnout_prediction.py                                           
+```
 
+If `requirements.txt` or tests are missing, see the "Next steps" section below.
 
-📂 Dataset
-Dataset used: work_from_home_burnout_dataset.csv
-Contains features like:
+## Project structure
+
+- `Burnout_Prediction.py` — Streamlit demo and inference UI
+- `work_from_home_burnout_dataset.csv` — source dataset (demo)
+- `README.md` — this document
+
+Add `src/`, `models/`, and `notebooks/` if you split training and serving code later.
+
+## Design decisions & engineering notes
+
+- Baseline model: Random Forest — reliable, fast to iterate, interpretable via feature importances.
+- Class imbalance: SMOTE applied on training folds to reduce bias toward majority class.
+- Reproducibility: set random seeds for splits and model training.
+- Deployment: Streamlit is used for quick demos; production should separate training and serving, use a REST API or serverless function, and add authentication.
+
+## Data provenance & ethics
+
+- Dataset: `work_from_home_burnout_dataset.csv` is included for demo purposes. 
+
+- Contains features like:
     Work Hours
     Screen Time
     Meetings Count
@@ -36,70 +80,36 @@ Contains features like:
     Burnout Score
     Day Type (Weekday/Weekend)
 
-⚙️ How It Works
-1. Data Preprocessing
-Removed missing values and duplicates
-Encoded categorical variables using Label Encoding
-Balanced dataset using SMOTE
-2. Model Training
-Algorithm: Random Forest Classifier
-Parameters:
-n_estimators = 200
-class_weight = balanced
-Train-Test Split: 80% training, 20% testing
-3. Prediction
-User inputs work metrics via sidebar
-Model predicts burnout risk:
-🟢 Low
-🟡 Medium
-🔴 High
-4. Output
-Displays:
-    Risk Level (color-coded)
-    Accuracy Score
-    Confusion Matrix
+## Reproducing training (engineer checklist)
 
-📊 Visualizations
-Feature Importance (Key burnout drivers)
-Work Hours vs Sleep Correlation
-Burnout Risk Distribution
+1. Prepare environment and install dependencies.
+2. Inspect `work_from_home_burnout_dataset.csv` and validate schema.
+3. Run the training script or notebook; ensure seeds are set.
+4. Validate metrics on a holdout set and record them (accuracy, precision, recall, F1 per class).
 
-▶️ How to Run the Project
-Step 1: Clone Repository
-git clone https://github.com/your-username/burnout-predictor.git
-cd burnout-predictor
-Step 2: Install Dependencies
-pip install -r requirements.txt
-Step 3: Run the App
-uv run streamlit run app.py
 
-📈 Model Performance
-The model achieves good accuracy using balanced data
-Confusion Matrix is used to evaluate classification performance
-Handles class imbalance effectively using SMOTE
 
-🧠 Key Insights
+
+## Metrics & monitoring
+
+- Track data drift, prediction distribution, latency, and error rates.
+- Log inputs (with PII removed or hashed) and predictions for offline audits.
+
+## Key Insights
 Higher work hours + low sleep → Higher burnout risk
 Frequent breaks reduce burnout probability
 After-hours work significantly increases risk
 
-⚠️ Limitations
+## Limitations
 Uses synthetic dataset (may not reflect real-world perfectly)
 Limited features (mental health, stress levels not included)
 Model can be improved with real-world data
 
-🔮 Future Improvements
-Use real-world datasets
-Add deep learning models
-Deploy on cloud (AWS / Azure / GCP)
-Add user authentication & history tracking
-Improve UI/UX design
 
-👥 Team Contributions
-Bindhu Sahithi – Model Training & Prediction Logic
-Rishaniya Parthasarathy – Data Cleaning & Evaluation
-Sharaban Tahura – UI Design & Styling
-Lawrence Jaba Anand & Kevin Jeff Raj – Visualizations
+## Contributors
 
-📌 Conclusion
-The Smart Burnout Predictor demonstrates how machine learning can be applied to workplace wellness. It provides actionable insights that help users maintain a healthy work-life balance and prevent burnout proactively.
+- Bindhu Sahithi — Model training & prediction logic
+- Rishaniya Parthasarathy — Data cleaning & evaluation
+- Sharaban Tahura — UI design & styling
+- Lawrence Jaba Anand — Visualizations
+
