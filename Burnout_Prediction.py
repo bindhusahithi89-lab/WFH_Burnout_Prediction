@@ -12,7 +12,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix, classification_rep
 # --------------------------
 # 1. Page Configuration & Custom CSS
 # --------------------------
-#-- PART: Sharaban Tahura---
+# --- PART: Sharaban Tahura ---
 # Responsibility: Set up Streamlit page configuration and apply custom CSS for a professional look
 st.set_page_config(page_title="Burnout Predictor", layout="wide")
 
@@ -52,7 +52,7 @@ def load_and_train():
     # Cleaning column names by stripping any leading/trailing whitespace (Defensive Programming)
     df.columns = df.columns.str.strip()
 
-    # --- PART: BINDHU  ---
+    # --- PART: BINDHU  SAHITHI VELUDANDI ---
     # Responsibility: Data preprocessing and model training
     # Encoding categorical variables (Day Type and Burnout Risk) into numerical values for the model
     # Handle missing values
@@ -80,21 +80,21 @@ def load_and_train():
     # Splitting data so 20% is reserved for evaluating model performance and accuracy
     X_train, X_test, y_train, y_test = train_test_split(X_res, y_res, test_size=0.2, random_state=42)
 
-    #-- PART: Bindhu --
+    # --- PART: BINDHU  SAHITHI VELUDANDI ---
     # Training the Random Forest Classifier with balanced class weights
     rf_model = RandomForestClassifier(n_estimators=200, class_weight='balanced', random_state=42)
     rf_model.fit(X_train, y_train)
 
     return rf_model, le_target, X_test, y_test, df, features
 
-#--PART: Bindhu ---
+# --- PART: BINDHU  SAHITHI VELUDANDI ---
 # Responsibility: Execute the training function and store results in variables
 model, le_target, X_test, y_test, full_df, feature_cols = load_and_train()
 
 # --------------------------
 # 3. Sidebar - Input Features (UI)
 # --------------------------
-#-- PART: Sharaban Tahura ---
+# --- PART: Sharaban Tahura ---
 # Responsibility: Create interactive sidebar for user input of daily work parameters
 # These interactive fields allow users to enter their daily work parameters
 st.sidebar.header("📋 Employee Work Metrics")
@@ -126,7 +126,7 @@ st.markdown("---")
 # Layout using columns to display results and metrics side-by-side
 col1, col2 = st.columns([1, 1])
 
-#--Bindhu part--
+# --- PART: BINDHU  SAHITHI VELUDANDI ---
 # Responsibility: Implement model prediction and display results 
 with col1:
     st.subheader("🚀 Live Prediction")
@@ -168,7 +168,7 @@ with col2:
 # --------------------------
 # 5. Interactive Visualizations
 # --------------------------
-#-- PART: Lawrence Jaba Anand, Kevin Jeff Raj ---
+# --- PART: Lawrence Jaba Anand, Kevin Jeff Raj ---
 # Responsibility: Create interactive visualizations to explore the dataset and model insights
 st.markdown("---")
 st.subheader("📊 Interactive Data Visualizations")
