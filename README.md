@@ -34,13 +34,19 @@ pip install -r requirements.txt
 4. Run the demo UI:
 
 ```powershell
-streamlit run Burnout_Prediction.py
+uv run streamlit run Burnout_Prediction.py
 ```
 
 5. Run unit tests :
 
 ```powershell
-pytest -q
+python -m venv .venv
+
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+. .\.venv\Scripts\Activate.ps1
+
+
+python -m pytest tests/test_burnout_prediction.py                                           
 ```
 
 If `requirements.txt` or tests are missing, see the "Next steps" section below.
