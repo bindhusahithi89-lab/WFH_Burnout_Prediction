@@ -10,14 +10,10 @@
 #    python -m pip install -r requirements.txt
 #
 # 4) Run the Streamlit demo
-#    streamlit run Burnout_Prediction.py
+#    uv streamlit run Burnout_Prediction.py
 #
-# 5) Run tests and save output
-#    python -m pytest tests/test_burnout_prediction.py -q | Tee-Object -FilePath test_results.txt
-#
-# Alternative (no activation): run venv python directly
-#    .\.venv\Scripts\python.exe -m pip install -r requirements.txt
-#    .\.venv\Scripts\python.exe -m pytest tests/test_burnout_prediction.py -q
+# 5) Run tests 
+#    python -m pytest unit_tests/test_burnout_prediction.py
 
 pandas
 numpy

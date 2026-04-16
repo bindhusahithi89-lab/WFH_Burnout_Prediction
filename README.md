@@ -46,10 +46,9 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
 . .\.venv\Scripts\Activate.ps1
 
 
-python -m pytest tests/test_burnout_prediction.py                                           
+python -m pytest unit_tests/test_burnout_prediction.py                                           
 ```
 
-If `requirements.txt` or tests are missing, see the "Next steps" section below.
 
 ## Project structure
 
